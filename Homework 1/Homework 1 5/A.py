@@ -2,8 +2,6 @@ import silence_tensorflow.auto
 import tensorflow as tf
 import keras
 import numpy as np
-import random
-import cv2
 import os
 import matplotlib.pyplot as plt
 from keras.applications import VGG16

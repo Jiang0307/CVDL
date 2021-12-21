@@ -6,3 +6,4 @@
 *.gz
 *.v2
 *.profile-empty
+*.pyc

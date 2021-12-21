@@ -1,7 +1,7 @@
+import silence_tensorflow.auto
 import sys
 import numpy as np
 import cv2
-import silence_tensorflow.auto
 import tensorflow as tf
 import keras
 import numpy as np
