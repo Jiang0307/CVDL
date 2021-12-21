@@ -30,8 +30,8 @@ def read_images(image_count):
         path = os.path.join(os.path.dirname(__file__) , "Dataset_OpenCvDl_Hw2" , "Q2_Image" , str(i+1)+".bmp")
         img = cv2_imread(path)
         IMAGES.append(img)
+    return
         
-    
 def draw_corner():
     temp = np.asarray(IMAGES)
     result = []
@@ -47,8 +47,8 @@ def undistort():
     temp = np.asarray(IMAGES)
     objp = np.zeros((1, NX*NY, 3), np.float32)
     objp[0,:,:2] = np.mgrid[0:NX, 0:NY].T.reshape(-1, 2)
-    objpoints = [] # 3d point in real world space
-    imgpoints = [] # 2d points in image plane.
+    objpoints = []
+    imgpoints = []
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
     result = []
     for img in temp:
@@ -100,7 +100,7 @@ class MainWindow(QtWidgets.QMainWindow,UI):
             cv2.imshow(title , img)
             cv2.waitKey(500)
         cv2.waitKey()
-        cv2.destroyAllWindows()  
+        cv2.destroyAllWindows()
         return
 
     def HW2_2_2(self):
