@@ -7,7 +7,6 @@ import keras
 import numpy as np
 import random
 import os
-#import unicode
 import matplotlib.pyplot as plt
 import torchvision.models as models
 from torchsummary import summary
