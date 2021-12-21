@@ -56,9 +56,9 @@ class UI(object):
         self.Label2_3.setGeometry(15 , 75 , 200 , 30)
         self.Label2_3.setObjectName("label2_3")
         
-        self.TextEdit2_3 = QtWidgets.QLineEdit(self.GroupBox_2_3)
-        self.TextEdit2_3.setGeometry(165 , 75 , 180 , 30)
-        self.TextEdit2_3.setObjectName("text2_3")
+        self.LineEdit2_3 = QtWidgets.QLineEdit(self.GroupBox_2_3)
+        self.LineEdit2_3.setGeometry(165 , 75 , 180 , 30)
+        self.LineEdit2_3.setObjectName("text2_3")
         
         self.Button2_4 = QtWidgets.QPushButton(self.GroupBox_2)
         self.Button2_4.setGeometry(QtCore.QRect(20, 370, 360, 40))
