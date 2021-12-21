@@ -1,3 +1,8 @@
 *.jpg
 *.png
+*.bmp
 *.h5
+*.pb
+*.gz
+*.v2
+*.profile-empty
