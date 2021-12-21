@@ -18,6 +18,14 @@ def cv2_imread(path):
     img = cv2.imdecode(np.fromfile(path,dtype=np.uint8) , -1)
     return img
 
+def plot_to_image (fig):
+    fig.canvas.draw()
+    width,height = fig.canvas.get_width_height()
+    buffer = np.frombuffer( fig.canvas.tostring_argb(), dtype=np.uint8 )
+    buffer.shape = (width,height,4)
+    buffer = np.roll (buffer,3,axis=2)
+    return buffer
+
 def count_images(type):
     count = 0
     for file in os.listdir(PATH):       
@@ -69,14 +77,6 @@ def undistort():
         img = img[y:y+h, x:x+w]
         result.append(img)
     return result
-
-def plot_to_image (fig):
-    fig.canvas.draw()
-    width,height = fig.canvas.get_width_height()
-    buffer = np.frombuffer( fig.canvas.tostring_argb(), dtype=np.uint8 )
-    buffer.shape = (width,height,4)
-    buffer = np.roll (buffer,3,axis=2)
-    return buffer
 
 class MainWindow(QtWidgets.QMainWindow,UI):
     def __init__(self, parent=None):
