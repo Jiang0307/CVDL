@@ -123,6 +123,8 @@ class MainWindow(QtWidgets.QMainWindow,UI):
     def HW2_5_3(self):
         try:
             index = int(self.textEdit.text())
+            if index<0 or index>=len(self.test):
+                return
             img = self.test[index][0]
             test_img = np.expand_dims(img,axis=0)
             ans = self.model_5_3.predict(test_img)
