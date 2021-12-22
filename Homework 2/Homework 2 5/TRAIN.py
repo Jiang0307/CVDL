@@ -89,24 +89,20 @@ def build_model():
     return model
 
 def data_augmentation(train):
-    augmentation_data = []
-    augmentation_label = []
+    augmentation = []
     train_temp = np.asarray(train)
     for i in range(len(train_temp)):
         img = train_temp[i][0] #TRAIN[i][1]是label
         label = train_temp[i][1]
         # original
-        augmentation_data.append(img)
-        augmentation_label.append(label)
+        augmentation.append([img,label])
         # horizontal flip
         h_flip = cv2.flip(img,1)
-        augmentation_data.append(h_flip)
-        augmentation_label.append(label)
+        augmentation.append([h_flip,label])
         # brighter
         t1 = random.uniform(0,0.2)
         bright = tf.image.adjust_brightness(img,t1)
-        augmentation_data.append(bright)
-        augmentation_label.append(label)
+        augmentation.append([bright,label])
         """
         # darker
         t2 = random.uniform(0,0.2)
@@ -114,18 +110,21 @@ def data_augmentation(train):
         augmentation_data.append(dark)
         augmentation_label.append(label)
         """
-    return augmentation_data , augmentation_label
+    return augmentation
 
-def split_image_label(train , validation , test):
+def split_image_label(train , validation , test , augmentation):
     train_data = []
     train_label = []
     validation_data = []
     validation_label = []
     test_data = []
     test_label = []
+    augmentation_data = []
+    augmentation_label = []
     train_temp = np.asarray(train)
     validation_temp = np.asarray(validation)
     test_temp = np.asarray(test)
+    augmentation_temp = np.asarray(augmentation)
     for image, label in train_temp:
         train_data.append(image)
         train_label.append(label)
@@ -135,15 +134,19 @@ def split_image_label(train , validation , test):
     for image, label in test_temp:
         test_data.append(image)
         test_label.append(label)
-
+    for image, label in augmentation_temp:
+        augmentation_data.append(image)
+        augmentation_label.append(label)
+        
     train_data = np.asarray(train_data)
     train_label = np.asarray(train_label)
     validation_data = np.asarray(validation_data)
     validation_label = np.asarray(validation_label)
     test_data = np.asarray(test_data)
     test_label = np.asarray(test_label)
-    
-    return train_data , train_label , validation_data , validation_label , test_data , test_label
+    augmentation_data = np.asarray(augmentation_data)
+    augmentation_label = np.asarray(augmentation_label)
+    return train_data , train_label , validation_data , validation_label , test_data , test_label , augmentation_data , augmentation_label
 
 def training(model , train_data , train_label , validation_data , validation_label , augmented):
     if augmented == True:
@@ -163,11 +166,11 @@ def training(model , train_data , train_label , validation_data , validation_lab
 
 if __name__ == "__main__": 
     (train , validation , test) = load_data()
-    (train_data , train_label , validation_data , validation_label , test_data,test_label) = split_image_label(train,validation,test)
-    (train_data_augmented , train_label_augmented) = data_augmentation(train)
+    augmentation = data_augmentation(train)
+    (train_data , train_label , validation_data , validation_label , test_data,test_label , train_data_augmented , train_label_augmented) = split_image_label(train , validation , test , augmentation)
     
     model_without_augmentation = build_model()
-    training(model_without_augmentation , train_data , train_label , validation_data , validation_label , False)
+    #training(model_without_augmentation , train_data , train_label , validation_data , validation_label , False)
     
     model_with_augmentation = build_model()
     training(model_with_augmentation , train_data_augmented , train_label_augmented , validation_data , validation_label , True)
