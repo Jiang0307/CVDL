@@ -17,7 +17,7 @@ from keras.callbacks import EarlyStopping , TensorBoard
 from tensorflow.python.keras.utils.data_utils import validate_file
 warnings.filterwarnings("ignore")
 
-BATCH_SIZE = 16
+BATCH_SIZE = 8
 LEARNING_RATE = 0.00001
 OPTIMIZER = "Adam"
 SIZE = (224,224)
@@ -68,6 +68,9 @@ def load_data():
                                 test.append(temp)
                     except:
                         pass
+    random.shuffle(train)
+    random.shuffle(validation)
+    random.shuffle(test)    
     return train,validation,test
 
 def build_model():
@@ -88,9 +91,10 @@ def build_model():
 def data_augmentation(train):
     augmentation_data = []
     augmentation_label = []
-    for i in range(len(train)):
-        img = train[i][0] #TRAIN[i][1]是label
-        label = train[i][1]
+    train_temp = np.asarray(train)
+    for i in range(len(train_temp)):
+        img = train_temp[i][0] #TRAIN[i][1]是label
+        label = train_temp[i][1]
         # original
         augmentation_data.append(img)
         augmentation_label.append(label)
@@ -166,4 +170,4 @@ if __name__ == "__main__":
     training(model_without_augmentation , train_data , train_label , validation_data , validation_label , False)
     
     model_with_augmentation = build_model()
-    training(model_with_augmentation , train_data , train_label , validation_data , validation_label , True)
+    training(model_with_augmentation , train_data_augmented , train_label_augmented , validation_data , validation_label , True)
