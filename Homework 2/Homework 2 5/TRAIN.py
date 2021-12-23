@@ -69,8 +69,6 @@ def load_data():
                     except:
                         pass
     random.shuffle(train)
-    random.shuffle(validation)
-    random.shuffle(test)    
     return train,validation,test
 
 def build_model():
@@ -170,7 +168,7 @@ if __name__ == "__main__":
     (train_data , train_label , validation_data , validation_label , test_data,test_label , train_data_augmented , train_label_augmented) = split_image_label(train , validation , test , augmentation)
     
     model_without_augmentation = build_model()
-    #training(model_without_augmentation , train_data , train_label , validation_data , validation_label , False)
+    training(model_without_augmentation , train_data , train_label , validation_data , validation_label , False)
     
     model_with_augmentation = build_model()
     training(model_with_augmentation , train_data_augmented , train_label_augmented , validation_data , validation_label , True)

@@ -8,6 +8,7 @@ import webbrowser
 import time
 import keras
 import warnings
+import random
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -76,6 +77,7 @@ def load_data():
                                 test.append(temp)
                     except:
                         pass
+    random.shuffle(test)
     return test
 
 def build_model():

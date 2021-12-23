@@ -4,6 +4,7 @@ import keras
 import numpy as np
 import cv2
 import os
+import random
 import matplotlib.pyplot as plt
 import warnings
 from PIL import Image
@@ -60,6 +61,7 @@ def load_data():
                                 test.append(temp)
                     except:
                         pass
+    random.shuffle(test)
     return test
 
 def split_image_label(test):
@@ -91,6 +93,7 @@ def prediction_accuracy(test_label, prediction):
             predicted_label.append(predict)
 
     accuracy = correct / len(test_label) * 100
+    accuracy = int(round(accuracy))
     print("accuracy : ", correct / len(test_label) * 100)
     return accuracy
 
