@@ -1,0 +1,9 @@
+/__pycache__
+*.mp4
+*.weights
+*.jpg
+*.cfg
+*.pdf
+*.names
+*.pyc
+LICENSE
