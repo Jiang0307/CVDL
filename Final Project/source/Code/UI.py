@@ -1,6 +1,17 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'testvyfbNA.ui'
+##
+## Created by: Qt User Interface Compiler version 5.15.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -35,9 +46,13 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
+
         QMetaObject.connectSlotsByName(MainWindow)
+    # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Gun and Fire Detection", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Select Test Image", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Select Test Video", None))
+    # retranslateUi
+
